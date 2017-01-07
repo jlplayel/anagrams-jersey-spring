@@ -9,20 +9,33 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.jlplayel.anagram.config.SpringConfiguration;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.util.ReflectionTestUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfiguration.class)
-@Transactional
 public class AnagramDaoImplTest {
     
     @Autowired
-    AnagramDao anagramDao;
+    private JdbcTemplate jdbcTemplate;
+    
+    private AnagramDao anagramDao;
+    
+    @Before
+    public void initAndMockClassUnderTest(){
+        if( anagramDao == null ){
+            anagramDao = new AnagramDaoImpl();
+            cleanDataBaseInfo();
+            ReflectionTestUtils.setField(anagramDao, "jdbcTemplate", jdbcTemplate);
+        }
+    }
+    
     
     @Test
     public void testGetTotalAmountOfAvailableWords_notTableExist(){
@@ -154,6 +167,11 @@ public class AnagramDaoImplTest {
         Set<String> anagramsSet = anagrams.stream().collect(Collectors.toSet());
         
         assertEquals( 2, anagramsSet.size() );
+    }
+    
+    
+    private void cleanDataBaseInfo(){
+        jdbcTemplate.execute("TRUNCATE SCHEMA public AND COMMIT");
     }
       
 }

@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+
 import org.jlplayel.anagram.dao.AnagramDao;
 import org.jlplayel.anagram.tool.LetterTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,11 @@ public class AnagramServiceSqlImpl implements AnagramService {
     
     @Autowired
     private DictionaryService dictionaryService;
+    
+    @PostConstruct
+    public void init() {
+        loadAllWordsIfTheyAreMissing();
+    }
     
     @Override
     public List<String> getAnagramsOf(String phrase) {

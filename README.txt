@@ -9,7 +9,6 @@ Spaces or any other symbol non-letter is not considered.
 There are two different ways implemented, called Java and Sql.
 - The Java approach uses pure Java 8 for getting the anagrams.
 - The Sql approach uses an in-memory database for getting the solution.
-    The first time is slower because it loads the dictionary.
 
 PERFORMANCE
 It is reasonable for a "normal" computer if the phrase does not have many letters.
@@ -24,10 +23,10 @@ REQUIREMENT
 - Optional: Eclipse with Gradle plugging and/or a configured served.
 
 GRADLE COMMANDS
--  $>gradle build : generates the WAR file, ready for be included in the server.
--  $>gradle test : runs the unitary test
--  $>gradle integrationTest : runs the integration test
-
+-  $ gradle build : generates the WAR file, ready for be included in the server.
+-  $ gradle test : runs the unitary test
+-  $ gradle integrationTest : runs the integration test
+- Optional(for preparing to Eclipse): $ gradle cleaneclipse eclipse
 
 DEPENDENCIES
 Check the build.graddle file for a full list of dependencies and their versions.
