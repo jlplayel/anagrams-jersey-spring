@@ -19,16 +19,17 @@ public class WordsCombinator {
      * @param words. This words are going to be combined.
      * @return List of sentence with all combinations of words with lenth 3.
      */
-    public static List<String> getAllPhraseCombinations( int letterNum, 
-                                                  List<String> words,
-                                                  int minWordLength){
+    public static List<String> getAllPhraseCombinations( int letterNum,
+                                                         List<String> words,
+                                                         int minWordLength){
         Map<Integer,List<String>> lengthWord = generateLengthWordMap( words );
         
         List<String> result = new ArrayList<>();
         
-        WordLengthCombinator wlc  = new WordLengthCombinator(letterNum, minWordLength);
+        List<List<Integer>> combinations = 
+                WordLengthCombinator.getValuesFor(letterNum, minWordLength);
         
-        for( List<Integer> lengths : wlc.getResult() ){    
+        for( List<Integer> lengths : combinations ){
             if ( areThereWordsWithNeededLengths(lengths, lengthWord) ) {
                 List<List<String>> wordsToCombine = lengths.parallelStream()
                                                            .map( n -> lengthWord.get(n) )

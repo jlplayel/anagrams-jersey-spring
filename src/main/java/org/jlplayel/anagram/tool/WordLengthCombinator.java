@@ -8,31 +8,46 @@ import java.util.stream.IntStream;
 
 public class WordLengthCombinator {
     
-    private final int minWordLength;
-    
-    private int totalLength;
-    private List<List<Integer>> result;
-
-    public WordLengthCombinator( int totalLength, int minWordLength) {
-        this.minWordLength = minWordLength;
-        this.totalLength = totalLength;
-        this.result = new ArrayList<>();
-        generateWordLengthOptions();
-    }
-    
-    private void generateWordLengthOptions(){
+    /**
+     * Generates the possible word combinations from min word length considered and the total
+     * phrase length.
+     * 
+     * For example, if it is consider that the words in the combination has to have a minimum
+     * of three letters and the phrase size is 9, the possible length combination are:
+     * 
+     *   {9}, {6, 3}, {5, 4}, {3, 3, 3}
+     *   
+     * All words with length 9, or a word with length 6 and another with length 3, or a word
+     * with length 5 and another with length 4, or three words with length 3.
+     * 
+     * @param totalLength
+     * @param minWordLength
+     * @return
+     */
+    public static List<List<Integer>> getValuesFor(int totalLength, int minWordLength){
+        
+        List<List<Integer>> result = new ArrayList<>();
+        
         int maxNumWord = totalLength/minWordLength;
         
-        this.result.add(Arrays.asList( totalLength ));
+        if(totalLength >= minWordLength){
+            result.add(Arrays.asList( totalLength ));    
+        }
         
         if( maxNumWord >= 2){
             for( int numWords = 2 ; numWords <= maxNumWord ; numWords++ ){
-                generateResultFor( numWords );
+                result.addAll( generateResultFor( numWords, totalLength, minWordLength) );
             }
         }
+        
+        return result;
     }
 
-    private void generateResultFor( int numWords ){
+    private static List<List<Integer>> generateResultFor( int numWords, 
+                                                          int totalLength, 
+                                                          int minWordLength){
+        List<List<Integer>> result = new ArrayList<>();
+        
         int[] value = new int[numWords];
         
         //Init the array
@@ -42,13 +57,15 @@ public class WordLengthCombinator {
         }
         result.add( IntStream.of(value).boxed().collect(Collectors.toList()) );
         
-        while( !maxDifIsOnlytOne(value, numWords) ){
-            moveOne( value, numWords );
+        while( !maxDifIsOnlytOne(value, numWords, totalLength) ){
+            moveOne( value, numWords, minWordLength );
             result.add( IntStream.of(value).boxed().collect(Collectors.toList()) );
         }
+        
+        return result;
     }
     
-    private void moveOne( int[] value, int numWords ){
+    private static void moveOne( int[] value, int numWords, int totalLength ){
         boolean change = false;
         for(int i=value.length-1; i>0; i--){
             if( value[i-1] > value[i]+1){
@@ -59,7 +76,7 @@ public class WordLengthCombinator {
             }
         }
         
-        if( !change && !maxDifIsOnlytOne(value, numWords) ){
+        if( !change && !maxDifIsOnlytOne(value, numWords, totalLength) ){
             int likeLast = value.length-1;
             for(int i=value.length-2; i>=0; i--){
                 if( value[i] == value[value.length-1]){
@@ -74,7 +91,7 @@ public class WordLengthCombinator {
         }
     }
     
-    private boolean maxDifIsOnlytOne( int[] value, int numWords){
+    private static boolean maxDifIsOnlytOne( int[] value, int numWords, int totalLength){
         if( totalLength%numWords==0 && value[0] == value[value.length-1]){
             return true;
         }
@@ -82,11 +99,6 @@ public class WordLengthCombinator {
             return true;
         }
         return false;
-    }
-    
-
-    public List<List<Integer>> getResult() {
-        return result;
     }
     
 }

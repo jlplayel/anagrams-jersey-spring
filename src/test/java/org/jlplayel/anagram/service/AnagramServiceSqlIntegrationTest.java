@@ -67,8 +67,8 @@ public class AnagramServiceSqlIntegrationTest {
         List<String> result1 = anagramService.getAnagramsOf(anagram1);
         List<String> result2 = anagramService.getAnagramsOf(anagram2);
         
-        assertNotNull(result1.get(0));
-        assertNotEquals(result1, result2);
+        assertEquals(1, result1.size());
+        assertEquals(2, result2.size());
     }
     
     

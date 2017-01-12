@@ -60,7 +60,7 @@ public class AnagramServiceSqlImpl implements AnagramService {
     }
     
     private boolean isValidPhrase( String phrase ){
-        if( phrase==null || phrase.length()==0 ){
+        if( phrase==null || phrase.length()<MIN_WORD_LENGTH ){
             return false;
         }
         return true;
