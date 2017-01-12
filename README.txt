@@ -67,6 +67,7 @@ http://localhost:8080/rest/javasolution/anagrams/Monterreal!
 
 FOR DEVELOPERS
 In general the code is "clean" (always can be better) and possible improvements could be:
+- To handle exceptions.
 - To adapt the 3 letters restriction to a more flexible use, right now it is hard-coded.
 - To adapt to i18n, right now it is going to work only with English alphabet.
 - To adapt to different dictionaries.
