@@ -12,7 +12,7 @@ public class WordLenthCombinatorTest {
     private int MIN_WORD_LENGTH = 3;
     
     @Test
-    public void testGetAnagramKey_totalPhraseLenght0(){
+    public void testGetValuesFor_totalPhraseLenght0(){
         List<List<Integer>> combinations = 
                 WordLengthCombinator.getValuesFor( 0, MIN_WORD_LENGTH);
         
@@ -21,7 +21,7 @@ public class WordLenthCombinatorTest {
     
     
     @Test
-    public void testGetAnagramKey_totalPhraseLenght2(){
+    public void testGetValuesFor_totalPhraseLenght2(){
         List<List<Integer>> combinations = 
                 WordLengthCombinator.getValuesFor( 2, MIN_WORD_LENGTH);
 
@@ -30,7 +30,7 @@ public class WordLenthCombinatorTest {
     
     
     @Test
-    public void testGetAnagramKey_totalPhraseLenght3(){
+    public void testGetValuesFor_totalPhraseLenght3(){
         List<List<Integer>> combinations = 
                 WordLengthCombinator.getValuesFor( 3, MIN_WORD_LENGTH);
         
@@ -41,7 +41,7 @@ public class WordLenthCombinatorTest {
     
     
     @Test
-    public void testGetAnagramKey_totalPhraseLenght5(){
+    public void testGetValuesFor_totalPhraseLenght5(){
         List<List<Integer>> combinations = 
                 WordLengthCombinator.getValuesFor( 5, MIN_WORD_LENGTH);
         
@@ -52,7 +52,7 @@ public class WordLenthCombinatorTest {
     
     
     @Test
-    public void testGetAnagramKey_totalPhraseLenght9(){
+    public void testGetValuesFor_totalPhraseLenght9(){
         List<List<Integer>> combinations = 
                 WordLengthCombinator.getValuesFor( 9, MIN_WORD_LENGTH);
 
@@ -77,7 +77,7 @@ public class WordLenthCombinatorTest {
     
     
     @Test
-    public void testGetAnagramKey_totalPhraseLenght15(){
+    public void testGetValuesFor_totalPhraseLenght15(){
         
         List<List<Integer>> solution = Arrays.asList(Arrays.asList(15),
                                                      Arrays.asList(12, 3),

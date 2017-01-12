@@ -17,7 +17,7 @@ public class WordsCombinator {
      * 
      * @param letterNum, the exactly number of letter in the solution senteces.
      * @param words. This words are going to be combined.
-     * @return List of sentence with all combinations of words with lenth 3.
+     * @return List of sentence with all combinations of words with lenth minWordLength.
      */
     public static List<String> getAllPhraseCombinations( int letterNum,
                                                          List<String> words,
